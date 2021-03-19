@@ -28,17 +28,17 @@ export default {
       setTimeout(() => {
         setInterval(() => {
           this.blink = !this.blink;
-        }, 1000);
+        }, 500);
       }, this.timer);
     },
   },
-  created() {
+  mounted() {
     if (this.light === "red") {
-      this.timer = 6000;
+      this.timer = 7000;
     } else if (this.light === "yellow") {
       this.timer = 0;
     } else if (this.light === "green") {
-      this.timer = 11000;
+      this.timer = 12000;
     }
     this.intervalBlink();
   },

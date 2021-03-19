@@ -23,7 +23,7 @@ export default {
       }
     },
   },
-  created() {
+  mounted() {
     this.counter = this.nowCounter;
     this.countTimer();
   },

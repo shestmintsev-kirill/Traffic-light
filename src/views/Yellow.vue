@@ -17,13 +17,12 @@ export default {
   }),
   mounted() {
     localStorage.light = JSON.stringify(this.light);
-    if (localStorage.switchValue) {
-      if (this.$route.params.switchLight) {
-        this.switchValue = this.$route.params.switchLight;
-      } else {
-        this.switchValue = JSON.parse(localStorage.switchValue);
-      }
+    if (this.$route.params.switchLight) {
+      this.switchValue = this.$route.params.switchLight;
       localStorage.switchValue = JSON.stringify(this.switchValue);
+    }
+    if (localStorage.switchValue) {
+      this.switchValue = JSON.parse(localStorage.switchValue);
       const sissionLight = JSON.parse(localStorage.switchValue);
       if (sissionLight === "toGreen") {
         setTimeout(() => {
