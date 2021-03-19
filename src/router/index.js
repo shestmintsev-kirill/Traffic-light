@@ -5,6 +5,10 @@ import Green from "../views/Green.vue";
 
 const routes = [
   {
+    path: "/",
+    redirect: "/red",
+  },
+  {
     path: "/red",
     name: "Red",
     component: Red,

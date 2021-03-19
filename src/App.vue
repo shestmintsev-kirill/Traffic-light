@@ -12,8 +12,6 @@ export default {
     if (localStorage.light) {
       this.nowLight = JSON.parse(localStorage.light);
       this.$router.push(`/${this.nowLight}`);
-    } else {
-      this.$router.push("/red");
     }
   },
 };
