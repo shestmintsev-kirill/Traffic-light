@@ -1,12 +1,18 @@
 <template>
   <div
     :class="{
-      bgRed: light === 'red',
-      bgYellow: light === 'yellow',
-      bgGreen: light === 'green',
-      blink: blink,
+      red: light === 'red',
+      blink: blink && light === 'red',
     }"
-    class="light"
+    class="light bgRed"
+  ></div>
+  <div
+    :class="{ yellow: light === 'yellow', blink: blink && light === 'yellow' }"
+    class="light bgYellow"
+  ></div>
+  <div
+    :class="{ green: light === 'green', blink: blink && light === 'green' }"
+    class="light bgGreen"
   ></div>
 </template>
 
@@ -49,22 +55,38 @@ export default {
 
 .light {
   margin: auto;
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   transition: 0.2s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+
+  & + .light {
+    margin-top: 20px;
+  }
 }
 
 .bgRed {
-  background: red;
+  background: rgba(255, 0, 0, 0.2);
 }
 
 .bgYellow {
-  background: yellow;
+  background: rgba(255, 255, 0, 0.2);
 }
 
 .bgGreen {
+  background: rgba(0, 128, 0, 0.2);
+}
+
+.red {
+  background: red;
+}
+
+.yellow {
+  background: yellow;
+}
+
+.green {
   background: green;
 }
 
