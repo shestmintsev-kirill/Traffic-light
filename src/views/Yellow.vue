@@ -1,6 +1,6 @@
 <template>
   <section class="outer">
-    <Spotlight :light="light" />
+    <Spotlight :activeTime="activeTime" :light="light" />
     <Counter :nowCounter="3" />
   </section>
 </template>
@@ -14,8 +14,9 @@ export default {
   data: () => ({
     light: "yellow",
     switchValue: null,
+    activeTime: 3000,
   }),
-  mounted() {
+  created() {
     localStorage.light = JSON.stringify(this.light);
     if (this.$route.params.switchLight) {
       this.switchValue = this.$route.params.switchLight;
@@ -27,16 +28,16 @@ export default {
       if (sissionLight === "toGreen") {
         setTimeout(() => {
           this.$router.push({ name: "Green" });
-        }, 3000);
+        }, this.activeTime);
       } else if (sissionLight === "toRed") {
         setTimeout(() => {
           this.$router.push({ name: "Red" });
-        }, 3000);
+        }, this.activeTime);
       }
     } else {
       setTimeout(() => {
         this.$router.push({ name: "Green" });
-      }, 3000);
+      }, this.activeTime);
     }
   },
 };

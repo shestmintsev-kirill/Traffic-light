@@ -14,12 +14,14 @@
 export default {
   name: "Spotlight",
   data: () => ({
-    timer: null,
     blink: false,
   }),
   props: {
     light: {
       type: String,
+    },
+    activeTime: {
+      type: Number,
     },
   },
 
@@ -29,17 +31,10 @@ export default {
         setInterval(() => {
           this.blink = !this.blink;
         }, 500);
-      }, this.timer);
+      }, this.activeTime - 3000);
     },
   },
-  mounted() {
-    if (this.light === "red") {
-      this.timer = 7000;
-    } else if (this.light === "yellow") {
-      this.timer = 0;
-    } else if (this.light === "green") {
-      this.timer = 12000;
-    }
+  created() {
     this.intervalBlink();
   },
 };

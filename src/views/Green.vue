@@ -1,6 +1,6 @@
 <template>
   <section class="outer">
-    <Spotlight :light="light" />
+    <Spotlight :activeTime="activeTime" :light="light" />
     <Counter :nowCounter="15" />
   </section>
 </template>
@@ -13,12 +13,13 @@ export default {
   name: "Green",
   data: () => ({
     light: "green",
+    activeTime: 15000,
   }),
-  mounted() {
+  created() {
     localStorage.light = JSON.stringify(this.light);
     setTimeout(() => {
       this.$router.push({ name: "Yellow", params: { switchLight: "toRed" } });
-    }, 15000);
+    }, this.activeTime);
   },
 };
 </script>
