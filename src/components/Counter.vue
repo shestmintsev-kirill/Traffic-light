@@ -15,17 +15,18 @@ export default {
   },
   methods: {
     countTimer() {
-      if (this.counter > 0) {
+      return new Promise((resolve) => {
         setTimeout(() => {
           this.counter -= 1;
           this.countTimer();
         }, 1000);
-      }
+        resolve();
+      });
     },
   },
-  created() {
+  async created() {
     this.counter = this.nowCounter;
-    this.countTimer();
+    await this.countTimer();
   },
 };
 </script>

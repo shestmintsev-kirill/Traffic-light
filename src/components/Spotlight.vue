@@ -30,18 +30,20 @@ export default {
       type: Number,
     },
   },
-
   methods: {
     intervalBlink() {
-      setTimeout(() => {
-        setInterval(() => {
-          this.blink = !this.blink;
-        }, 500);
-      }, this.activeTime - 3000);
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          setInterval(() => {
+            this.blink = !this.blink;
+          }, 500);
+        }, this.activeTime - 3000);
+        resolve();
+      });
     },
   },
-  created() {
-    this.intervalBlink();
+  async created() {
+    await this.intervalBlink();
   },
 };
 </script>
@@ -55,8 +57,8 @@ export default {
 
 .light {
   margin: auto;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   transition: 0.2s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);

@@ -16,29 +16,37 @@ export default {
     switchValue: null,
     activeTime: 3000,
   }),
-  created() {
+  methods: {
+    routeTo() {
+      return new Promise((resolve) => {
+        if (localStorage.switchValue) {
+          this.switchValue = JSON.parse(localStorage.switchValue);
+          const sissionLight = JSON.parse(localStorage.switchValue);
+          if (sissionLight === "toGreen") {
+            setTimeout(() => {
+              this.$router.push({ name: "Green" });
+            }, this.activeTime);
+          } else if (sissionLight === "toRed") {
+            setTimeout(() => {
+              this.$router.push({ name: "Red" });
+            }, this.activeTime);
+          }
+        } else {
+          setTimeout(() => {
+            this.$router.push({ name: "Green" });
+          }, this.activeTime);
+        }
+        resolve();
+      });
+    },
+  },
+  async created() {
     localStorage.light = JSON.stringify(this.light);
     if (this.$route.params.switchLight) {
       this.switchValue = this.$route.params.switchLight;
       localStorage.switchValue = JSON.stringify(this.switchValue);
     }
-    if (localStorage.switchValue) {
-      this.switchValue = JSON.parse(localStorage.switchValue);
-      const sissionLight = JSON.parse(localStorage.switchValue);
-      if (sissionLight === "toGreen") {
-        setTimeout(() => {
-          this.$router.push({ name: "Green" });
-        }, this.activeTime);
-      } else if (sissionLight === "toRed") {
-        setTimeout(() => {
-          this.$router.push({ name: "Red" });
-        }, this.activeTime);
-      }
-    } else {
-      setTimeout(() => {
-        this.$router.push({ name: "Green" });
-      }, this.activeTime);
-    }
+    await this.routeTo();
   },
 };
 </script>

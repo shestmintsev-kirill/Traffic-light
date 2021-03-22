@@ -15,11 +15,22 @@ export default {
     light: "red",
     activeTime: 10000,
   }),
-  created() {
+  methods: {
+    switchRoute() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          this.$router.push({
+            name: "Yellow",
+            params: { switchLight: "toGreen" },
+          });
+        }, this.activeTime);
+        resolve();
+      });
+    },
+  },
+  async created() {
     localStorage.light = JSON.stringify(this.light);
-    setTimeout(() => {
-      this.$router.push({ name: "Yellow", params: { switchLight: "toGreen" } });
-    }, this.activeTime);
+    await this.switchRoute();
   },
 };
 </script>
